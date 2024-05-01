@@ -1,4 +1,6 @@
 using ApiGateway.ForWeb.Models.DiscountServices;
+using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IDiscountService, RDiscountService>();
+builder.Configuration.SetBasePath(builder.Environment.ContentRootPath).
+    AddJsonFile("ocelot.json").
+    AddOcelot(builder.Environment).AddEnvironmentVariables();
+builder.Services.AddOcelot(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -20,8 +26,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+
+app.UseRouting();
 app.UseAuthorization();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+}
+);
 
-app.MapControllers();
-
+app.UseOcelot().Wait();
 app.Run();
