@@ -10,8 +10,25 @@
         }
       ],
 
+
       "UpstreamPathTemplate": "/api/Product",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [ "GET" ],
+      "RateLimitOptions": {
+        "EnableRateLimiting": true, // فعال یا غیر فعال
+        "Period": "2s", // بازه زمانی
+        "PeriodTimespan": 5, // مدت زمانی که باید صبر کنیم برای درخواست بعدی
+        "Limit": 1 // محدودیت درخواست
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3, // بعد از چند خطا مدار را باز کنم؟
+        "DurationOfBreak": 5000, // به چه مدت مدار باز باشد؟
+        "TimeoutValue": 9000 // اگر هر درخواست بیشتر از تایم زمان برد آن را برگشت بده- منتظر درخواست نمون
+      },
+      "FileCacheOptions": {
+        "TtlSeconds": 15,//زمان کش
+        "Region": "Cache"
+      }
+
     },
     {
       "DownstreamPathTemplate": "/api/Product/{id}",

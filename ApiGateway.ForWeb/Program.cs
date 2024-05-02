@@ -1,6 +1,8 @@
 using ApiGateway.ForWeb.Models.DiscountServices;
+using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Ocelot.Provider.Polly;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +16,11 @@ builder.Services.AddTransient<IDiscountService, RDiscountService>();
 builder.Configuration.SetBasePath(builder.Environment.ContentRootPath).
     AddJsonFile("ocelot.json").
     AddOcelot(builder.Environment).AddEnvironmentVariables();
-builder.Services.AddOcelot(builder.Configuration);
+builder.Services.AddOcelot(builder.Configuration).
+    AddPolly().
+    AddCacheManager(x => { x.WithDictionaryHandle(); });
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
