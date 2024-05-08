@@ -609,6 +609,10 @@
         {
           "Host": "localhost",
           "Port": 44304
+        },
+        {
+          "Host": "localhost",
+          "Port": 8000
         }
       ],
       "DownstreamHttpMethod": null,
@@ -616,8 +620,8 @@
       "DownstreamPathTemplate": "/api/Product",
       "DownstreamScheme": "https",
       "FileCacheOptions": {
-        "TtlSeconds": 0,
-        "Region": "",
+        "TtlSeconds": 15,
+        "Region": "Cache",
         "Header": null
       },
       "HttpHandlerOptions": {
@@ -636,16 +640,16 @@
       },
       "Priority": 1,
       "QoSOptions": {
-        "DurationOfBreak": 1,
-        "ExceptionsAllowedBeforeBreaking": 0,
-        "TimeoutValue": 0
+        "DurationOfBreak": 5000,
+        "ExceptionsAllowedBeforeBreaking": 3,
+        "TimeoutValue": 9000
       },
       "RateLimitOptions": {
         "ClientWhitelist": [],
-        "EnableRateLimiting": false,
-        "Period": null,
-        "PeriodTimespan": 0.0,
-        "Limit": 0
+        "EnableRateLimiting": true,
+        "Period": "2s",
+        "PeriodTimespan": 5.0,
+        "Limit": 1
       },
       "RequestIdKey": null,
       "RouteClaimsRequirement": {},

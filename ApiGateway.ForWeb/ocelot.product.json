@@ -7,12 +7,19 @@
         {
           "Host": "localhost",
           "Port": 44304
+        },
+        {
+          "Host": "localhost",
+          "Port": 8000
         }
       ],
 
 
       "UpstreamPathTemplate": "/api/Product",
       "UpstreamHttpMethod": [ "GET" ],
+      "LoadBalancing": {
+        "Policy": "RoundRobin"
+      },
       "RateLimitOptions": {
         "EnableRateLimiting": true, // فعال یا غیر فعال
         "Period": "2s", // بازه زمانی
@@ -25,7 +32,7 @@
         "TimeoutValue": 9000 // اگر هر درخواست بیشتر از تایم زمان برد آن را برگشت بده- منتظر درخواست نمون
       },
       "FileCacheOptions": {
-        "TtlSeconds": 15,//زمان کش
+        "TtlSeconds": 15, //زمان کش
         "Region": "Cache"
       }
 
