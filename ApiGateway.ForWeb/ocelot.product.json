@@ -3,6 +3,13 @@
     {
       "DownstreamPathTemplate": "/api/Product",
       "DownstreamScheme": "https",
+      "ServiceDiscoveryProvider": {
+        "Type": "Eureka"
+      },
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection",
+        "Expiry": 30
+      },
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",

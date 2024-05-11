@@ -634,9 +634,9 @@
       },
       "Key": null,
       "LoadBalancerOptions": {
-        "Expiry": 2147483647,
+        "Expiry": 30,
         "Key": "",
-        "Type": ""
+        "Type": "LeastConnection"
       },
       "Priority": 1,
       "QoSOptions": {
