@@ -372,7 +372,7 @@
       "AddQueriesToRequest": {},
       "AuthenticationOptions": {
         "AllowedScopes": [],
-        "AuthenticationProviderKey": null,
+        "AuthenticationProviderKey": "ApiGateWayForWebAuthenticationScheme",
         "AuthenticationProviderKeys": []
       },
       "ChangeDownstreamPathTemplate": {},

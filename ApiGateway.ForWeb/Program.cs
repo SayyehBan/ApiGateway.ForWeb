@@ -1,4 +1,6 @@
 using ApiGateway.ForWeb.Models.DiscountServices;
+using ApiGateway.ForWeb.Models.Links;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
@@ -19,8 +21,14 @@ builder.Configuration.SetBasePath(builder.Environment.ContentRootPath).
 builder.Services.AddOcelot(builder.Configuration).
     AddPolly().
     AddCacheManager(x => { x.WithDictionaryHandle(); });
+var AuthenticationSchemeKey = "ApiGateWayForWebAuthenticationScheme";
 
-
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(AuthenticationSchemeKey, option =>
+    {
+        option.Authority = LinkServices.IdentityService;
+        option.Audience = "apigatewayforweb";
+    });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

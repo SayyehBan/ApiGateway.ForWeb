@@ -15,7 +15,10 @@
           "Host": "localhost",
           "Port": 44376
         }
-      ]
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "ApiGateWayForWebAuthenticationScheme"
+      }
     }
   ]
 }
